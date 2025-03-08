@@ -5,10 +5,10 @@ clusterName: kubernetes
 talosVersion: "${talosVersion}"
 kubernetesVersion: "${kubernetesVersion}"
 
-endpoint: https://192.168.120.20:6443
+endpoint: https://192.168.178.200:6443
 additionalApiServerCertSans: &sans
   - "127.0.0.1"
-  - "192.168.120.20"
+  - "192.168.178.200"
 additionalMachineCertSans: *sans
 
 clusterPodNets: ["10.42.0.0/16"]
@@ -20,7 +20,7 @@ cniConfig:
 
 nodes:
   - hostname: "talos-node1"
-    ipAddress: "192.168.178.105"
+    ipAddress: "192.168.178.110"
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
@@ -31,15 +31,15 @@ nodes:
           hardwareAddr: "00:15:5d:b2:15:00"
         dhcp: false
         addresses:
-          - "192.168.178.105/24"
+          - "192.168.178.110/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.120.1"
+            gateway: "192.168.178.1"
         mtu: 1500
         vip:
-          ip: "192.168.120.20"
+          ip: "192.168.178.200"
   - hostname: "talos-node2"
-    ipAddress: "192.168.178.106"
+    ipAddress: "192.168.178.108"
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
@@ -50,15 +50,15 @@ nodes:
           hardwareAddr: "00:15:5d:b2:15:01"
         dhcp: false
         addresses:
-          - "192.168.178.106/24"
+          - "192.168.178.108/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.120.1"
+            gateway: "192.168.178.1"
         mtu: 1500
         vip:
-          ip: "192.168.120.20"
+          ip: "192.168.178.200"
   - hostname: "talos-node3"
-    ipAddress: "192.168.178.107"
+    ipAddress: "192.168.178.109"
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
@@ -69,13 +69,13 @@ nodes:
           hardwareAddr: "00:15:5d:b2:15:02"
         dhcp: false
         addresses:
-          - "192.168.178.107/24"
+          - "192.168.178.109/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.120.1"
+            gateway: "192.168.178.1"
         mtu: 1500
         vip:
-          ip: "192.168.120.20"
+          ip: "192.168.178.200"
 
 # Global patches
 patches:
