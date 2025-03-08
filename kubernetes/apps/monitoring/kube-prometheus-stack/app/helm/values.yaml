@@ -98,12 +98,29 @@ grafana:
         gnetId: 16219
         revision: 1
         datasource: Prometheus
+      kubernetes-cluster-monitoring:
+        gnetId: 7249
+        revision: 1
+        datasource: Prometheus
+      node-exporter-full:
+        gnetId: 1860
+        revision: 27
+        datasource: Prometheus
+  # Enable Lens access to Grafana API
+  serviceAccount:
+    autoMount: true
   # Enable ingress for Grafana
   ingress:
     enabled: true
     ingressClassName: internal
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
     hosts:
-      - grafana.${SECRET_DOMAIN}
+      - "grafana.${SECRET_DOMAIN}"
+    tls:
+      - secretName: "grafana-tls"
+        hosts:
+          - "grafana.${SECRET_DOMAIN}"
 
 # node-exporter collects system metrics
 nodeExporter:
