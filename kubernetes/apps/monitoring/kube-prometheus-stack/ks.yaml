@@ -6,6 +6,9 @@ metadata:
   name: &app kube-prometheus-stack
   namespace: &namespace monitoring
 spec:
+  dependsOn:
+    - name: cert-manager-tls
+      namespace: cert-manager
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

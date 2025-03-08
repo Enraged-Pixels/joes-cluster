@@ -8,5 +8,7 @@ configMapGenerator:
   - name: kube-prometheus-stack-values
     files:
       - values.yaml=./helm/values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
 configurations:
   - ./helm/kustomizeconfig.yaml
