@@ -1,0 +1,140 @@
+---
+# Default values that work well with Talos Linux
+# Optimized for minimal resource usage while providing full functionality
+
+# Use CRDs already deployed by Talos (defined in talconfig.yaml)
+crds:
+  enabled: false
+
+# Reduce the resources required for the Prometheus operator
+prometheusOperator:
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  admissionWebhooks:
+    patch:
+      resources:
+        limits:
+          memory: 64Mi
+        requests:
+          cpu: 50m
+          memory: 32Mi
+
+# Configure Prometheus for reasonable resource usage
+prometheus:
+  prometheusSpec:
+    resources:
+      limits:
+        memory: 1024Mi
+      requests:
+        cpu: 200m
+        memory: 512Mi
+    # This is required for Lens to show metrics in its dashboard
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+    podMonitorSelector: {}
+    podMonitorNamespaceSelector: {}
+    # Retention settings
+    retention: 10d
+    retentionSize: "10GB"
+    # Kubelet service discovery - ensures Lens gets node metrics
+    serviceMonitorKubelet:
+      metricRelabelings:
+        - action: replace
+          sourceLabels:
+            - node
+          targetLabel: instance
+    # Enable scraping of Talos API endpoints
+    additionalScrapeConfigs:
+      - job_name: "talos"
+        scrape_interval: 15s
+        metrics_path: /metrics
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true
+        static_configs:
+          - targets:
+              - "192.168.1.31:2381"  # talos-node1
+              - "192.168.1.29:2381"  # talos-node2
+              - "192.168.1.30:2381"  # talos-node3
+
+# Allow cross namespace service discovery
+global:
+  rbac:
+    createAggregateClusterRoles: true
+
+# Configure Alertmanager with reduced resources
+alertmanager:
+  alertmanagerSpec:
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+# Configure lightweight Grafana
+grafana:
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  # Add persistence so dashboards and settings are saved
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 1Gi
+  # Default admin password - change this in production!
+  adminPassword: "prom-operator"
+  # Add Talos Linux dashboard
+  dashboards:
+    default:
+      talos-system-dashboard:
+        gnetId: 16219
+        revision: 1
+        datasource: Prometheus
+  # Enable ingress for Grafana
+  ingress:
+    enabled: true
+    ingressClassName: internal
+    hosts:
+      - grafana.${SECRET_DOMAIN}
+
+# node-exporter collects system metrics
+nodeExporter:
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 50m
+      memory: 32Mi
+
+# kube-state-metrics collects Kubernetes object metrics
+kubeStateMetrics:
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+# Configure default resource limits for components not explicitly configured
+defaultRules:
+  create: true
+kubeApiServer:
+  enabled: true
+kubeControllerManager:
+  enabled: true
+coreDns:
+  enabled: true
+kubeEtcd:
+  enabled: true
+kubeScheduler:
+  enabled: true
+kubeProxy:
+  enabled: true
