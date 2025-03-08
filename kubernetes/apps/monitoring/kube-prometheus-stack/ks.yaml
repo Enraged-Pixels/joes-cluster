@@ -12,9 +12,12 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   interval: 1h
-  path: ./kubernetes/apps/monitoring/kube-prometheus-stack/app
-  prune: true
+  path: ./kubernetes/apps/monitoring/kube-prometheus
   retryInterval: 2m
   sourceRef:
     kind: GitRepository
