@@ -51,7 +51,7 @@ fullnameOverride: ""
 ## @param resourceType Can be either Deployment or StatefulSet
 ## Overwrite automatic resource type detection by specifying the resource type
 ##
-resourceType: ""
+resourceType: "Deployment"
 
 ## @param commonAnnotations Annotations for the deployment or statefulset
 ##
