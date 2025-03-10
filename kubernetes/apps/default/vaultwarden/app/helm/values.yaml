@@ -255,13 +255,13 @@ storage:
     accessMode: "ReadWriteMany"
     name: "vaultwarden-data"
     size: "2Gi"
-    class: "local-path"
+    class: ""
     path: "/data"
   attachments:
     accessMode: "ReadWriteMany"
     name: "vaultwarden-attachments"
     size: "10Gi"
-    class: "local-path"
+    class: ""
     path: "/data/attachments"
 
 ## @param webVaultEnabled Enable Web Vault
