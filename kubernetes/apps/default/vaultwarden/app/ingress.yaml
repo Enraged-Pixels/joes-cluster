@@ -13,6 +13,8 @@ spec:
         paths:
           - path: /
             pathType: Prefix
-            service:
-              identifier: app
-              port: https
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  name: https
