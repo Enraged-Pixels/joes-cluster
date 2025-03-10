@@ -20,6 +20,3 @@ spec:
   targetNamespace: *namespace
   timeout: 5m
   wait: false
-valuesFrom:
-  - kind: ConfigMap
-    name: vaultwarden-values
