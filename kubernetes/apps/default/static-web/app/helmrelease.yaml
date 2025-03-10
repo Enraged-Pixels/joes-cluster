@@ -50,9 +50,6 @@ spec:
                 cpu: 10m
               limits:
                 memory: 64Mi
-            volumeMounts:
-              - name: static-content
-                mountPath: /usr/share/nginx/html
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
