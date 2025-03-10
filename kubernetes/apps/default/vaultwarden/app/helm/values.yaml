@@ -51,7 +51,7 @@ fullnameOverride: ""
 ## @param resourceType Can be either Deployment or StatefulSet
 ## Overwrite automatic resource type detection by specifying the resource type
 ##
-resourceType: "Deployment"
+resourceType: ""
 
 ## @param commonAnnotations Annotations for the deployment or statefulset
 ##
@@ -252,11 +252,13 @@ storage:
   existingVolumeClaim:
     claimName: ""
   data:
+    accessMode: "ReadWriteMany"
     name: "vaultwarden-data"
     size: "2Gi"
     class: "local-path"
     path: "/data"
   attachments:
+    accessMode: "ReadWriteMany"
     name: "vaultwarden-attachments"
     size: "10Gi"
     class: "local-path"
