@@ -62,49 +62,6 @@ spec:
         ports:
           http:
             port: *port
-    configMaps:
-      static-content:
-        enabled: true
-        data:
-          index.html: |
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <title>Hello from Kubernetes!</title>
-              <style>
-                body {
-                  font-family: Arial, sans-serif;
-                  margin: 0;
-                  padding: 30px;
-                  background-color: #f5f5f5;
-                }
-                .container {
-                  max-width: 800px;
-                  margin: 0 auto;
-                  background-color: white;
-                  padding: 30px;
-                  border-radius: 10px;
-                  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                }
-                h1 { color: #3498db; }
-                p { line-height: 1.6; }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <h1>Hello World from Kubernetes!</h1>
-                <p>This is a simple static web page served from a container in your Kubernetes cluster.</p>
-                <p>Congratulations! If you can see this, your deployment was successful.</p>
-              </div>
-            </body>
-            </html>
-    persistence:
-      static-content:
-        enabled: true
-        type: configMap
-        name: static-content-static-web
-        globalMounts:
-          - path: /usr/share/nginx/html
     ingress:
       app:
         className: internal
