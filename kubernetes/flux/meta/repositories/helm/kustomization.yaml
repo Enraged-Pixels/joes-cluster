@@ -9,3 +9,4 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./metrics-server.yaml
+  - ./vaultwarden.yaml
