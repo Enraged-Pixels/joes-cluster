@@ -22,5 +22,5 @@ spec:
     remediation:
       retries: 3
   valuesFrom:
-  - kind: ConfigMap
-    name: vaultwarden-values
+    - kind: ConfigMap
+      name: vaultwarden-values
