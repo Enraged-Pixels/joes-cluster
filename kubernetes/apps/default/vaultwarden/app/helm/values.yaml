@@ -249,21 +249,17 @@ podDisruptionBudget:
 ##
 
 storage:
-  ## @param existingVolumeClaim If defined, the values here will be used for the data and
-  ## attachments PV's. The custom values for data and attachments will be ignored if
-  ## a value is set here
-  ##
   existingVolumeClaim:
     claimName: ""
   data:
-    name: ""
-    size: ""
-    class: ""
+    name: "vaultwarden-data"
+    size: "2Gi"
+    class: "local-path"
     path: "/data"
   attachments:
-    name: ""
-    size: ""
-    class: ""
+    name: "vaultwarden-attachments"
+    size: "10Gi"
+    class: "local-path"
     path: "/data/attachments"
 
 ## @param webVaultEnabled Enable Web Vault
