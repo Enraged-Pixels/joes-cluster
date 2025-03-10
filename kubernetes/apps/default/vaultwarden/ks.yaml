@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 1h
-  path: ./app
+  path: ./kubernetes/apps/default/vaultwarden/app
   prune: true
   retryInterval: 2m
   sourceRef:

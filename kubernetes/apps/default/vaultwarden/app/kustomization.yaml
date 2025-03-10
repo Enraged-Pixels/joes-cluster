@@ -5,7 +5,6 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./ingress.yaml
-  - ./secret.sops.yaml
 configMapGenerator:
   - name: vaultwarden-values
     files:
